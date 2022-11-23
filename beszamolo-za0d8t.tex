@@ -1,0 +1,52 @@
+\documentclass[a4paper, titlepage, 10pt]{report}
+\usepackage[utf8]{inputenc}
+
+\usepackage[magyar]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{graphicx}
+\usepackage{datetime}
+\usepackage{hyperref}
+\usepackage{tocbibind} % irodalomjegyzék, tárgymutató a tartalomjegyzékbe
+\usepackage{makeidx}
+\makeindex
+
+% beszúr egy képet képaláírással és címkével
+\newcommand{\kep}[4][1] { % a scale alapértelmezetten 1
+	\begin{figure}[h]
+		\centering \includegraphics[keepaspectratio, scale=#1]{#2}
+		\caption{\centering #3}
+		\label{fig:#4}
+	\end{figure}
+}
+
+\begin{document}
+
+	\pagenumbering{roman}
+	\include{cimoldal}
+
+	\tableofcontents
+
+	\newpage
+	\begin{abstract}
+		\addcontentsline{toc}{chapter}{\abstractname}
+		\pagenumbering{alph}
+		\thispagestyle{plain}
+		A témalaboratóriumom során egy nyílt forráskódú Android alkalmazáshoz fejlesztettem
+		egy töltőképernyő funkciót, hogy az az újabb, Android 12-t és újabbat futtató rendszereken
+		is megfelelően működjön.
+		Ehhez extenzíven megismerkedtem az Android dokumentációjával, példakódokat néztem, többféle
+		megoldást teszteltem. A munkám során betekintést nyertem a közösségi szoftverfejlesztésbe,
+		egy nagy, több, mint félmillió felhasználó eszközén futó program hatalmas kódbázisába.
+	\end{abstract}
+	\pagenumbering{arabic}
+	\newpage
+
+	\include{bevezetes}
+	\include{splashscreenapi}
+	\include{hetibontas}
+	\include{osszegzes}
+
+	\printindex
+
+\end{document}
