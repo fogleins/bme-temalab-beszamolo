@@ -7,18 +7,23 @@
 \usepackage{graphicx}
 \usepackage{datetime}
 \usepackage{hyperref}
+\usepackage{listings}
+\usepackage{float}
+% https://stackoverflow.com/questions/2193307/how-do-i-get-latex-to-hyphenate-a-word-that-contains-a-dash
+\usepackage[shortcuts]{extdash} % ``activity-implementációjának`` helyes elválasztásához
 \usepackage{tocbibind} % irodalomjegyzék, tárgymutató a tartalomjegyzékbe
 \usepackage{makeidx}
 \makeindex
 
 % beszúr egy képet képaláírással és címkével
 \newcommand{\kep}[4][1] { % a scale alapértelmezetten 1
-	\begin{figure}[h]
+	\begin{figure}[H]
 		\centering \includegraphics[keepaspectratio, scale=#1]{#2}
 		\caption{\centering #3}
 		\label{fig:#4}
 	\end{figure}
 }
+
 
 \begin{document}
 
