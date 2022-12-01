@@ -42,6 +42,18 @@ encoding=UTF-8
 highlight=LaTeX
 mode=LaTeX
 
+[item:offarchitektura.tex]
+archive=true
+encoding=UTF-8
+highlight=LaTeX
+mode=LaTeX
+
+[item:offattekintes.tex]
+archive=true
+encoding=UTF-8
+highlight=LaTeX
+mode=LaTeX
+
 [item:osszegzes.tex]
 archive=true
 encoding=UTF-8

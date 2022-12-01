@@ -1,16 +1,16 @@
-\chapter{Heti munkák}
+\chapter{Jelentősebb állomások a~fejlesztés során}
 Munkám jelentős részét az Android dokumentációjának tanulmányozása, illetve a különböző lehetőségek
 tesztelése tette ki. Fontos volt még megismerni a projekt fejlesztésére vonatkozó irányelveket
 (pl. kódformázási konvenciók, pull requestek pontos leírása).
 
-\section{Első hét}
+\section{Ismerkedés a projekttel}
 A projekt meghatározását követően igyekeztem megismerni annak felépítését, kideríteni, hogy
 pontosan melyik modulokkal kell majd dolgoznom a töltőképernyő frissebb verziójának elkészítéséhez.
 Ehhez klónoztam a projekt GitHub repositoryját, és az Android Studio fejlesztőkörnyezet
 segítségével részletesen tanulmányoztam a projekt struktúráját, a releváns kódrészleteket,
 beszereztem a függőségeket, és lefordítottam a programot.
 
-\section{Második hét}
+\section{Migrálás az új \acrshort{api}-ra, visszafelé kompatibilitás támogatása}
 Android 12-es verziót futtató emulátor telepítését követően az Android fejlesztői
 dokumentációjában fellelhető migrációs útmutatóból tájékozódtam a további feladataimról.
 Az itt leírtakat követve a töltőképernyő helyesen jelent meg az API 31-et futtató emulátoron.
@@ -32,9 +32,9 @@ A heti munkám során alkalmam nyílt megismerni egy, az Androidos szoftverfejle
 megoldást az alkalmazás különböző verzióinak egyszerű előállítására. Ebben a projektben ez
 különösképpen nagy jelentőséggel bír, mert nem csak arról van szó, hogy az alkalmast több
 alkalmazásboltban is terjesztik (pl. Google Play, F-Droid), hanem ugyanarra a kódbázisra
-három különböző alkalmazást (OpenFoodFacts (OFF), OpenBeautyFacts (OBF), OpenPetFoodFacts (OPF)) % TODO: ez OPF vagy OPFF?
+három különböző alkalmazást (\acrfull{off}, \acrfull{obf}, \acrfull{opff})
 is építenek. Ez azért is lehetséges, mert az alkalmazás lényegében csak egy felhasználói felület
-az OpenFoodFacts (és a többi verzió) adatbázisának elérésére. Így maga a kliens oldali alkalmazás
+az \acrlong{off} (és a többi verzió) adatbázisának elérésére. Így maga a kliens oldali alkalmazás
 az ikonok és egyéb felhasználói elemek kivételével megegyezik a három verzió között.
 A build variants % TODO ...
 
@@ -52,7 +52,7 @@ A build variants % TODO ...
 
 % TODO: ez még szerkesztésre szorul, csak át lett emelve a második hét alfejezetből,
 %       de ide való
-\section{Harmadik hét}
+\section{Implementáció továbbfejlesztése: éjszakai mód támogatása}
 Ezen a héten a munkám az éjszakai módban látható töltőképernyő helyes megjelenítésére irányult.
 Sikerült kölcsönkérnem egy Android 12-es verziót futtató eszközt, azonban ezen sem sikerült
 előállítanom a GitHub issue-ban szereplő módon a hibát, így folytattam a hiba okának felkutatását
@@ -60,10 +60,11 @@ a kódban és az interneten egyaránt. Rövid utánajárást követően kiderül
 \textit{styles.xml} fájlból nem volt megadva \textit{night} erőforrás-módosítóval
 (resource modifier) ellátott verzió. Ezt a hiányosságot pótoltam, létrehoztam egy éjszakai
 módban helyesen megjelenő stílus erőforrást. Ebben a háttérszín megváltoztatásán túl szükséges
-volt a SplashScreen API-által biztosított témából egy sajátot leszármaztatni, mely rendelkezik
+volt a SplashScreen \acrshort{api}-által biztosított témából egy sajátot leszármaztatni, mely rendelkezik
 az ikon helyes megjelenítéséhez szükséges propertykkel. Az így született téma az alábbi:
 
-\begin{lstlisting}[frame=single,language=xml]
+\begin{lstlisting}[frame=single,language=xml,emph={style,item},
+    emphstyle=\color{BurntOrange}\textbf,stringstyle=\color{OliveGreen}\textbf]
 <style name="SplashTheme"
   parent="Theme.SplashScreen.IconBackground">
     <item name="windowSplashScreenBackground">
@@ -81,20 +82,21 @@ az ikon helyes megjelenítéséhez szükséges propertykkel. Az így született 
 </style>
 \end{lstlisting}
 
-Ez azonban nem jelentett megoldást, mert a téma, amiből az API 30 feletti helyes működésért
-le kell származtatnunk a saját témánkat, nem támogtja az AppCompatActivity használatát, ami
-az OpenFoodFacts activity\-/implementációjának ősosztálya. Így a SplashScreen API által biztosított
+Ez azonban nem jelentett megoldást, mert a téma, amiből az \acrshort{api} 30 feletti helyes működésért
+le kell származtatnunk a saját témánkat, nem támogatja az AppCompatActivity használatát, ami
+az \acrlong{off} activity\-/implementációjának ősosztálya. Így a SplashScreen \acrshort{api} által biztosított
 téma kizárólagos használatával az alkalmazás a töltőképernyő megjelenítését követően crashelt,
 ez \az{\ref{fig:appcompatcrash}} ábrán látható.
 \kep[0.5]{include/theme-appcompat-crash.png}{\textit{AppCompat} téma használata nélkül
 az alkalmazás összeomlik}{appcompatcrash}
 
 A probléma megoldására a StackOverflow-n és az Android fejlesztői oldalán elérhető leírás
-nyújtott iránymutatást. A postSplashScreenTheme property megfelelő beállítását követően
+nyújtott iránymutatást. A \textit{postSplashScreenTheme} property megfelelő beállítását követően
 az alkalmazás már megfelelően működött, a töltőképernyő után a főképernyő helyesen jelent meg.
 Így az éjszakai módban használt téma kódja az alábbi:
 
-\begin{lstlisting}[frame=single,language=xml]
+\begin{lstlisting}[frame=single,language=xml,emph={style,item},
+    emphstyle=\color{BurntOrange}\textbf,stringstyle=\color{OliveGreen}\textbf]
  <style name="SplashTheme"
    parent="Theme.SplashScreen.IconBackground">
     <item name="windowSplashScreenBackground">
@@ -113,15 +115,36 @@ A fent definiált téma az alábbi módon jelenik meg a gyakorlatban (\ref{fig:d
 \kep[0.11]{include/darktheme.png}{A töltőképernyő éjszakai módban, Android 12-n}{darktheme}
 
 
-\section{Negyedik hét}
+\section{Egyezetés a projekt fejlesztőivel}
 A negyedik héten kommunikációt folytattam az alkalmazás fejlesztőivel a pull request lehetséges
-javításairól, illetve ennek merge-öléséről. A módosításaim végül elfogadásra kerültek, és
-bekerültek az alkalmazás kódbázisába.
+javításairól, illetve ennek merge-öléséről. Az alkalmazás egyik fejlesztője egy import
+eltávolítását javasolta, rövid utánajárást követően \cite{extensionfunction} én viszont arra jutottam, hogy ez nem
+hagyható el, ugyanis egy ún. Kotlin \textit{extension function}-ről van szó, amire az import
+nélkül nem tudunk hivatkozni. A Kotlinban támogatott extension function-ök olyankor lehetnek
+hasznosak, amikor egy már -- nem általunk -- megírt osztály lehetőségeit szeretnénk bővíteni.
+Ilyen megoldást alkalmaztak a SplashScreen könyvtár fejlesztői is, az Android által biztosított
+Activity osztályt bővítették ki egy \textit{installSplashScreen} metódussal:
+
+\begin{lstlisting}[frame=single,language=Kotlin,emph={style,item}
+    ,caption=Részlet a SplashScreen könyvtár kódjából az extension function-nel]
+ public fun Activity.installSplashScreen():
+            SplashScreen {
+    // ...
+ }
+\end{lstlisting}
+\kep[0.59]{include/gh-discussion.png}{Egyeztetés a projekt egyik fejlesztőjével az extension function importjáról}{ghdiscussion}
+
+Végül a projekt másik fejlesztője is az enyémmel azonos következtetésre jutott, az import
+nem hagyható el, így a módosításaim elfogadásra jutottak, és bekerültek az alkalmazás kódbázisába.
+
 % TODO: backwards compatibility támogatása
 %       sötét téma
 %       https://developer.android.com/develop/ui/views/launch/splash-screen/migrate#best-practices
 %       https://developer.android.com/reference/android/window/SplashScreen
 %       https://developer.android.com/develop/ui/views/launch/splash-screen
+%       https://github.com/openfoodfacts/openfoodfacts-androidapp/pull/4871
+%       https://github.com/openfoodfacts/openfoodfacts-androidapp/issues/4548
+%       https://kotlinlang.org/docs/extensions.html#scope-of-extensions
 % GitHub fogalomjegyzékbe
 % repository fogalomjegyzékbe
 % Android Studio fogalomjegyzékbe

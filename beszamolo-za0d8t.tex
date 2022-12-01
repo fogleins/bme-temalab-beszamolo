@@ -7,12 +7,19 @@
 \usepackage{graphicx}
 \usepackage{datetime}
 \usepackage{hyperref}
+\usepackage{url}
 \usepackage{listings}
-\usepackage{float}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{float} % kep környezetben H használatához (erősebb a h!-nél)
 % https://stackoverflow.com/questions/2193307/how-do-i-get-latex-to-hyphenate-a-word-that-contains-a-dash
 \usepackage[shortcuts]{extdash} % ``activity-implementációjának`` helyes elválasztásához
 \usepackage{tocbibind} % irodalomjegyzék, tárgymutató a tartalomjegyzékbe
+\usepackage[toc]{glossaries}
 \usepackage{makeidx}
+\usepackage{tikz}
+
+\makeglossaries
+\usetikzlibrary{shapes,calc,positioning}
 \makeindex
 
 % beszúr egy képet képaláírással és címkével
@@ -24,6 +31,38 @@
 	\end{figure}
 }
 
+% https://github.com/cansik/kotlin-latex-listing
+\lstdefinelanguage{Kotlin}{
+  comment=[l]{//},
+  commentstyle={\color{gray}\ttfamily},
+  emph={filter, first, firstOrNull, forEach, lazy, map, mapNotNull, println},
+  emphstyle={\color{OrangeRed}},
+  identifierstyle=\color{black},
+  keywords={!in, !is, abstract, actual, annotation, as, as?, break, by, catch, class,
+	companion, const, constructor, continue, crossinline, data, delegate, do, dynamic,
+	else, enum, expect, external, false, field, file, final, finally, for, fun, get, if,
+	import, in, infix, init, inline, inner, interface, internal, is, lateinit, noinline,
+	null, object, open, operator, out, override, package, param, private, property, protected,
+	public, receiveris, reified, return, return@, sealed, set, setparam, super, suspend,
+	tailrec, this, throw, true, try, typealias, typeof, val, var, vararg, when, where, while},
+  keywordstyle={\color{NavyBlue}\bfseries},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+  morestring=[s]{"""*}{*"""},
+  ndkeywords={@Deprecated, @JvmField, @JvmName, @JvmOverloads, @JvmStatic, @JvmSynthetic,
+	Array, Byte, Double, Float, Int, Integer, Iterable, Long, Runnable, Short, String, Any,
+	Unit, Nothing, Activity},
+  ndkeywordstyle={\color{BurntOrange}\bfseries},
+  sensitive=true,
+  stringstyle={\color{ForestGreen}\ttfamily},
+}
+
+
+\newacronym{off}{OFF}{OpenFoodFacts}
+\newacronym{obf}{OBF}{OpenBeautyFacts}
+\newacronym{opff}{OPFF}{OpenPetFoodFacts}
+\newacronym{api}{API}{Application Programming Interface}
+\newacronym{ocr}{OCR}{Optical Character Recognition}
 
 \begin{document}
 
@@ -40,18 +79,22 @@
 		A témalaboratóriumom során egy nyílt forráskódú Android alkalmazáshoz fejlesztettem
 		egy töltőképernyő funkciót, hogy az az újabb, Android 12-t és újabbat futtató rendszereken
 		is megfelelően működjön.
-		Ehhez extenzíven megismerkedtem az Android dokumentációjával, példakódokat néztem, többféle
+		Ehhez részletesen megismerkedtem az Android dokumentációjával, példakódokat néztem, többféle
 		megoldást teszteltem. A munkám során betekintést nyertem a közösségi szoftverfejlesztésbe,
-		egy nagy, több, mint félmillió felhasználó eszközén futó program hatalmas kódbázisába.
+		és egy nagy, több, mint félmillió felhasználó eszközén futó program hatalmas kódbázisába.
 	\end{abstract}
 	\pagenumbering{arabic}
 	\newpage
 
 	\include{bevezetes}
+	\include{offattekintes}
 	\include{splashscreenapi}
 	\include{hetibontas}
 	\include{osszegzes}
 
 	\printindex
+	\printglossaries
+	\bibliographystyle{plaindin}
+	\bibliography{irodalomjegyzek}
 
 \end{document}

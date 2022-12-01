@@ -2,7 +2,7 @@
 kile_livePreviewEnabled=true
 kile_livePreviewStatusUserSpecified=true
 kile_livePreviewTool=LivePreview-PDFLaTeX
-lastDocument=splashscreenapi.tex
+lastDocument=offattekintes.tex
 
 [document-settings,item:../beszamolo-za0d8t.tex]
 Bookmarks=
@@ -49,6 +49,24 @@ Indentation Mode=normal
 Mode=LaTeX
 Mode Set By User=false
 
+[document-settings,item:offarchitektura.tex]
+Bookmarks=
+Encoding=UTF-8
+Highlighting=LaTeX
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=LaTeX
+Mode Set By User=false
+
+[document-settings,item:offattekintes.tex]
+Bookmarks=
+Encoding=UTF-8
+Highlighting=LaTeX
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=LaTeX
+Mode Set By User=false
+
 [document-settings,item:osszegzes.tex]
 Bookmarks=
 Encoding=UTF-8
@@ -77,23 +95,31 @@ order=0
 
 [item:bevezetes.tex]
 open=true
-order=2
+order=3
 
 [item:cimoldal.tex]
 open=true
-order=1
+order=2
 
 [item:hetibontas.tex]
 open=true
-order=4
+order=5
+
+[item:offarchitektura.tex]
+open=true
+order=1
+
+[item:offattekintes.tex]
+open=true
+order=7
 
 [item:osszegzes.tex]
 open=true
-order=3
+order=4
 
 [item:splashscreenapi.tex]
 open=true
-order=5
+order=6
 
 [item:temalab-beszamolo.kilepr]
 open=false
@@ -108,35 +134,51 @@ TextFolding={"checksum":"81d2f0329585fd21b7180f636cc6a4d2aff2b2e2","ranges":[]}
 ViMarks=
 
 [view-settings,view=0,item:beszamolo-za0d8t.tex]
-CursorColumn=21
-CursorLine=8
+CursorColumn=52
+CursorLine=61
 Dynamic Word Wrap=false
 JumpList=
-TextFolding={"checksum":"4757305f3527bc05e324b28d5f49e1aa17dd418f","ranges":[]}
+TextFolding={"checksum":"053b05eda4cebd9b650befa1d6dd3de705158246","ranges":[]}
 ViMarks=
 
 [view-settings,view=0,item:bevezetes.tex]
-CursorColumn=21
-CursorLine=16
+CursorColumn=70
+CursorLine=24
 Dynamic Word Wrap=false
 JumpList=
-TextFolding={"checksum":"9accd13dbda181ab91ff9c25a3e703ae730dc545","ranges":[]}
+TextFolding={"checksum":"bf804c3cef8280b806cc771f12c32fdfc69768d9","ranges":[]}
 ViMarks=
 
 [view-settings,view=0,item:cimoldal.tex]
-CursorColumn=13
-CursorLine=14
+CursorColumn=67
+CursorLine=2
 Dynamic Word Wrap=false
 JumpList=
-TextFolding={"checksum":"31ca19bddf2614c4e5450f0a5aea578415c72041","ranges":[]}
+TextFolding={"checksum":"e4965ffdb1acfb2fdbfd354e13b993ea8255805b","ranges":[]}
 ViMarks=
 
 [view-settings,view=0,item:hetibontas.tex]
-CursorColumn=73
-CursorLine=7
+CursorColumn=90
+CursorLine=113
 Dynamic Word Wrap=false
 JumpList=
-TextFolding={"checksum":"79017a8420c0eb397fc6b0beb798a147202b216e","ranges":[]}
+TextFolding={"checksum":"b25db84db0a2e24aac132f8a3ad0a3487d6dbbf4","ranges":[]}
+ViMarks=
+
+[view-settings,view=0,item:offarchitektura.tex]
+CursorColumn=102
+CursorLine=10
+Dynamic Word Wrap=false
+JumpList=
+TextFolding={"checksum":"e5c7bd351aea01ee4642360f5f2cfc788bed53bf","ranges":[]}
+ViMarks=
+
+[view-settings,view=0,item:offattekintes.tex]
+CursorColumn=74
+CursorLine=19
+Dynamic Word Wrap=false
+JumpList=
+TextFolding={"checksum":"0ca40d30c525f3d1588e506cd57c4f6ae6d7df92","ranges":[]}
 ViMarks=
 
 [view-settings,view=0,item:osszegzes.tex]
@@ -148,9 +190,9 @@ TextFolding={"checksum":"36399c7e53095d5acdbccfc60abf00f782a4021f","ranges":[]}
 ViMarks=
 
 [view-settings,view=0,item:splashscreenapi.tex]
-CursorColumn=20
-CursorLine=2
+CursorColumn=0
+CursorLine=3
 Dynamic Word Wrap=false
 JumpList=
-TextFolding={"checksum":"9e1dab654b54c700617f6e8ca47b97f8de3466fa","ranges":[]}
+TextFolding={"checksum":"8cf4d957926397e16ab58c99dd4c895900055e18","ranges":[]}
 ViMarks=
