@@ -2,33 +2,30 @@
 
 % TODO: átfogalmazni
 A továbbiakban ismertetett tevékenységek megértéséhez elengedhetetlen
-az Android SplashScreen megoldások rövid áttekintése.
+az Android \gls{splashscreen} megoldások rövid áttekintése.
 
 \section{API level 30 (Android 11) és korábbi}
-Az Android 12-ben bevezetett új API előtt nem volt rendszerszintű támogatás töltőképernyők
+Az Android 12-ben bevezetett új \acrshort{api} előtt nem volt rendszerszintű támogatás töltőképernyők
 fejlesztésére, így a fejlesztők két lehetőség közül választhattak~\cite{splashscreenmigration}:
 \begin{itemize}
- \item Egyedi téma bevezetése, amivel a nézet \textit{windowBackground} propertyjét változtatták meg,
+ \item Egyedi \gls{tema} bevezetése, amivel a nézet \textit{windowBackground} propertyjét változtatták meg,
  majd állították vissza az alkalmazás betöltését követően az alapértelmezett értékre
- \item Egyedi \textit{Activity} létrehozásával: ezzel egy dedikált osztályt és nézetet hozunk létre
+ \item Egyedi \textit{\Gls{activity}} létrehozásával: ezzel egy dedikált osztályt és nézetet hozunk létre
  a töltőképernyő funkció megvalósítására, amely a betöltést vagy timeoutot követően elindítja
  az alkalmazás főképernyőjét % TODO: explicit intenttel, de erre nem biztos, hogy ebben a fejezetben ki kell térni
- % TODO: api a rövidítésjegyzékbe
  % TODO: timeout a szójegyzékbe
- % TODO: Activity a szójegyzékbe: ``An activity is a single, focused thing that the user can do. Almost all activities interact with the user, so the Activity class takes care of creating a window for you in which you can place your UI with''
- %          Forrás: https://developer.android.com/reference/android/app/Activity
 \end{itemize}
 
 
-Az OpenFoodFacts alkalmazásban az utóbbit választották a fejlesztők, ez viszont azt eredményezte,
+Az \acrlong{off} alkalmazásban az utóbbit választották a fejlesztők, ez viszont azt eredményezte,
 hogy Android 11 fölötti eszközökön két különböző töltőképernyő jelent meg az alkalmazás indulásakor,
 emiatt vált szükségessé az alkalmazás felkészítése az újabb verzióval való helyes működésre.
 
 \section{API level 31 (Android 12) és újabb}
-A SplashScreen API bevezetésével maga az operációs rendszer biztosít egységes megoldást
+A \glslink{splashscreen}{SplashScreen} \acrshort{api} bevezetésével maga az operációs rendszer biztosít egységes megoldást
 töltőképernyő készítésére. Ez olyan lehetőségekkel bővítette a programozók eszköztárát, ami korábban
 nem, vagy csak körülményesen volt megvalósítható (pl. animált ikonok beállítása
 a töltőképernyőre).
-Az új API arra is lehetőséget ad, hogy a régebbi szoftververziót futtató eszközökön a SplashScreen
-compat könyvtár % TODO: app compat hivatkozása
+Az új \acrshort{api} arra is lehetőséget ad, hogy a régebbi szoftververziót futtató eszközökön a \gls{splashscreen}
+compat könyvtár (mely az \gls{appcompat} könyvtár\footnote{\url{https://developer.android.com/jetpack/androidx/releases/appcompat}} részeként érhető el)
 segítségével biztosítsuk a visszafele kompatibilitást.

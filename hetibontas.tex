@@ -6,21 +6,21 @@ tesztelése tette ki. Fontos volt még megismerni a projekt fejlesztésére vona
 \section{Ismerkedés a projekttel}
 A projekt meghatározását követően igyekeztem megismerni annak felépítését, kideríteni, hogy
 pontosan melyik modulokkal kell majd dolgoznom a töltőképernyő frissebb verziójának elkészítéséhez.
-Ehhez klónoztam a projekt GitHub repositoryját, és az Android Studio fejlesztőkörnyezet
+Ehhez klónoztam a projekt \gls{github} repositoryját, és az \gls{androidstudio} fejlesztőkörnyezet
 segítségével részletesen tanulmányoztam a projekt struktúráját, a releváns kódrészleteket,
 beszereztem a függőségeket, és lefordítottam a programot.
 
-\section{Migrálás az új \acrshort{api}-ra, visszafelé kompatibilitás támogatása}
+\section{Migrálás az új API-ra, visszafelé kompatibilitás biztosítása}
 Android 12-es verziót futtató emulátor telepítését követően az Android fejlesztői
 dokumentációjában fellelhető migrációs útmutatóból tájékozódtam a további feladataimról.
-Az itt leírtakat követve a töltőképernyő helyesen jelent meg az API 31-et futtató emulátoron.
+Az itt leírtakat követve a töltőképernyő helyesen jelent meg az \acrshort{api} 31-et futtató emulátoron.
 Ilyen funkció esetében azonban nem feledkezhetünk meg a visszafelé kompatibilitás támogatásáról
-sem, ezért szükséges volt az új API-t nem ismerő eszközökön is tesztelni a megoldást.
-A régebbi API verziót futtató eszközök esetében azt a megoldást választottam, hogy a már meglévő
+sem, ezért szükséges volt az új \acrshort{api}-t nem ismerő eszközökön is tesztelni a megoldást.
+A régebbi \acrshort{api} verziót futtató eszközök esetében azt a megoldást választottam, hogy a már meglévő
 töltőképernyő jelenjen meg (azaz egy külön splash screen activity induljon el az alkalmazás
 indulásakor), míg az újakon a frissen implementált verzió. A~funkció tesztelése során
 megállapítottam, hogy a megoldás alapvetően az elvárt eredményt adja, azonban -- ahogy az a
-GitHub issue-ban is szerepelt -- az éjszakai módban nem az elvárt módon működik: sötét helyett
+\gls{github} issue-ban is szerepelt -- az éjszakai módban nem az elvárt módon működik: sötét helyett
 fehér háttérszínnel jelenik meg a képernyő. A hibajegyhez mellékelt képernyőképen szereplőhöz
 hasonló kinézetű töltőképernyőt az emulátoron nem sikerült reprodukálni, ott az éjszakai mód
 bekapcsolását követően is fehér háttérszínnel indult el a töltőképernyő, csak az alkalmazás
@@ -55,13 +55,13 @@ A build variants % TODO ...
 \section{Implementáció továbbfejlesztése: éjszakai mód támogatása}
 Ezen a héten a munkám az éjszakai módban látható töltőképernyő helyes megjelenítésére irányult.
 Sikerült kölcsönkérnem egy Android 12-es verziót futtató eszközt, azonban ezen sem sikerült
-előállítanom a GitHub issue-ban szereplő módon a hibát, így folytattam a hiba okának felkutatását
+előállítanom a \gls{github} issue-ban szereplő módon a hibát, így folytattam a hiba okának felkutatását
 a kódban és az interneten egyaránt. Rövid utánajárást követően kiderült, hogy a
 \textit{styles.xml} fájlból nem volt megadva \textit{night} erőforrás-módosítóval
 (resource modifier) ellátott verzió. Ezt a hiányosságot pótoltam, létrehoztam egy éjszakai
 módban helyesen megjelenő stílus erőforrást. Ebben a háttérszín megváltoztatásán túl szükséges
 volt a SplashScreen \acrshort{api}-által biztosított témából egy sajátot leszármaztatni, mely rendelkezik
-az ikon helyes megjelenítéséhez szükséges propertykkel. Az így született téma az alábbi:
+az ikon helyes megjelenítéséhez szükséges propertykkel. Az így született \gls{tema} az alábbi:
 
 \begin{lstlisting}[frame=single,language=xml,emph={style,item},
     emphstyle=\color{BurntOrange}\textbf,stringstyle=\color{OliveGreen}\textbf]
@@ -82,8 +82,8 @@ az ikon helyes megjelenítéséhez szükséges propertykkel. Az így született 
 </style>
 \end{lstlisting}
 
-Ez azonban nem jelentett megoldást, mert a téma, amiből az \acrshort{api} 30 feletti helyes működésért
-le kell származtatnunk a saját témánkat, nem támogatja az AppCompatActivity használatát, ami
+Ez azonban nem jelentett megoldást, mert a \gls{tema}, amiből az \acrshort{api} 30 feletti helyes működésért
+le kell származtatnunk a saját \glslink{tema}{témánkat}, nem támogatja az \gls{appcompat}\gls{activity} használatát, ami
 az \acrlong{off} activity\-/implementációjának ősosztálya. Így a SplashScreen \acrshort{api} által biztosított
 téma kizárólagos használatával az alkalmazás a töltőképernyő megjelenítését követően crashelt,
 ez \az{\ref{fig:appcompatcrash}} ábrán látható.

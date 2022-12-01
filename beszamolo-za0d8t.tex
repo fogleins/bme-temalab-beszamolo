@@ -18,6 +18,10 @@
 \usepackage{makeidx}
 \usepackage{tikz}
 
+% \usepackage{draftwatermark}
+% \SetWatermarkScale{6}
+% \SetWatermarkColor[gray]{0.95}
+
 \makeglossaries
 \usetikzlibrary{shapes,calc,positioning}
 \makeindex
@@ -63,6 +67,46 @@
 \newacronym{opff}{OPFF}{OpenPetFoodFacts}
 \newacronym{api}{API}{Application Programming Interface}
 \newacronym{ocr}{OCR}{Optical Character Recognition}
+
+\newglossaryentry{splashscreen}
+{
+	name=SplashScreen,
+	description={Töltőképernyő, mely az alkalmazás indításakor látható amíg a főképernyő nem tölt be}
+}
+
+\newglossaryentry{activity}
+{
+	name=Activity,
+	description={Android alkalmazáskomponens, mely rendelkezik felhasználói felülettel,
+	felhasználói interakciót tesz lehetővé. A hivatalos dokumentáció szerint:
+	''An activity is a single, focused thing that the user can do. Almost all activities
+	interact with the user, so the Activity class takes care of creating a
+	window for you in which you can place your UI with`` \cite{androidactivity}}
+}
+
+\newglossaryentry{github}
+{
+	name=GitHub,
+	description={Verziókövetési- és közösségi szoftverfejlesztési lehetőségeket (pl. hibajegyek kezelése) biztosító szolgáltatás. \url{https://github.com}}
+}
+
+\newglossaryentry{androidstudio}
+{
+	name={Android Studio},
+	description={Az Android szoftverfejlesztés hivatalos fejlesztőkörnyezete}
+}
+
+\newglossaryentry{appcompat}
+{
+	name=AppCompat,
+	description={Lehetőséget ad új \acrshort{api}-verziók használatára régebbi Android-verziókon}
+}
+
+\newglossaryentry{tema}
+{
+	name=téma,
+	description={Az alkalmazás megjelenését befolyásoló erőforrásfájl}
+}
 
 \begin{document}
 
