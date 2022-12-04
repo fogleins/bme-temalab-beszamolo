@@ -15,47 +15,40 @@ Android 12-es verziót futtató emulátor telepítését követően az Android f
 dokumentációjában fellelhető migrációs útmutatóból tájékozódtam a további feladataimról.
 Az itt leírtakat követve a töltőképernyő helyesen jelent meg az \acrshort{api} 31-et futtató emulátoron.
 Ilyen funkció esetében azonban nem feledkezhetünk meg a visszafelé kompatibilitás támogatásáról
-sem, ezért szükséges volt az új \acrshort{api}-t nem ismerő eszközökön is tesztelni a megoldást.
+sem, ezért szükséges volt az új \acrshort{api}-t nem ismerő eszközökön is tesztelni a programot.
 A régebbi \acrshort{api} verziót futtató eszközök esetében azt a megoldást választottam, hogy a már meglévő
-töltőképernyő jelenjen meg (azaz egy külön splash screen activity induljon el az alkalmazás
+töltőképernyő jelenjen meg (azaz egy külön \glslink{splashscreen}{splash screen} \gls{activity} induljon el az alkalmazás
 indulásakor), míg az újakon a frissen implementált verzió. A~funkció tesztelése során
-megállapítottam, hogy a megoldás alapvetően az elvárt eredményt adja, azonban -- ahogy az a
-\gls{github} issue-ban is szerepelt -- az éjszakai módban nem az elvárt módon működik: sötét helyett
+megállapítottam, hogy a megoldás alapvetően az megfelelő eredményt adja, azonban -- ahogy az a
+\gls{github} issue-ban \cite{issue} is szerepelt -- az éjszakai módban nem az elvárt módon működik: sötét helyett
 fehér háttérszínnel jelenik meg a képernyő. A hibajegyhez mellékelt képernyőképen szereplőhöz
 hasonló kinézetű töltőképernyőt az emulátoron nem sikerült reprodukálni, ott az éjszakai mód
 bekapcsolását követően is fehér háttérszínnel indult el a töltőképernyő, csak az alkalmazás
 további részei használták az éjszakai témát. Mivel Android 12-t futtató eszköz nem állt
-rendelkezésemre, ezért valódi hardveren nem tudtam tesztelni a megoldást.
+rendelkezésemre, ezért valódi hardveren nem tudtam tesztelni az programot.
 
-% TODO: megoldás szóismétlés
-A heti munkám során alkalmam nyílt megismerni egy, az Androidos szoftverfejlesztésben elterjedt
-megoldást az alkalmazás különböző verzióinak egyszerű előállítására. Ebben a projektben ez
+A munkám során alkalmam nyílt megismerni egy, az Androidos szoftverfejlesztésben elterjedt
+megoldást az alkalmazás különböző verzióinak egyszerű kezelésére és előállítására. Ebben a projektben ez
 különösképpen nagy jelentőséggel bír, mert nem csak arról van szó, hogy az alkalmast több
 alkalmazásboltban is terjesztik (pl. Google Play, F-Droid), hanem ugyanarra a kódbázisra
 három különböző alkalmazást (\acrfull{off}, \acrfull{obf}, \acrfull{opff})
 is építenek. Ez azért is lehetséges, mert az alkalmazás lényegében csak egy felhasználói felület
 az \acrlong{off} (és a többi verzió) adatbázisának elérésére. Így maga a kliens oldali alkalmazás
 az ikonok és egyéb felhasználói elemek kivételével megegyezik a három verzió között.
-A build variants % TODO ...
+A build variants használata lehetővé teszi, hogy mindössze egyetlen Android appot
+készítsenek, amit különféle verziókra (flavor) lehet lefordítani. Eleinte nehézséget okozott,
+hogy alapértelmezetten a git repository klónozását követően az \acrlong{obf} alkalmazás
+települt. Mivel az alkalmazás szinte teljesen megegyezik az \acrlong{off} alkalmazással, a
+tesztelés során ez nem jelentett gondot, de a \glslink{splashscreen}{splash screen} megjelenő ikon más, ezért az éjszakai
+mód teszteléséhez már az \acrlong{off}-et volt szükséges telepíteni. Némi kutatómunka után
+találtam rá arra a lehetőségre \gls{androidstudio}ban, amivel a fordítandó build variant-ot lehet
+kiválasztani. Így a továbbiakban a Google Play-re targetelt \acrlong{off} alkalmazással
+folytattam a fejlesztést.
 
-% Build variants: az OpenFoodFacts csapata az élelmiszerek mellett többféle termékkategóriához
-% készít szoftvert (pl. szépészeti készítmények, állateledelek). Mivel mindezek a verziók szoftveresen
-% nagyon hasonlóak, csak más-más backendet használnak, ezért mindössze egyetlen Android appot
-% készítenek, melyet lehetőség van különféle verziókra (flavor) fordítani. Eleinte nehézséget okozott,
-% hogy alapértelmezetten a git repository klónozását követően az OpenBeautyFacts alkalmazás
-% települt. Mivel az alkalmazás szinte teljesen megegyezik az OpenFoodFacts alkalmazással, a
-% tesztelés során ez nem jelentett gondot, de a splash screenen megjelenő ikon más, ezért az éjszakai
-% mód teszteléséhez már az OpenFoodFacts-et volt szükséges telepíteni. Némi kutatómunka után
-% találtam rá arra a lehetőségre Android Studioban, amivel a fordítandó build variant-ot lehet
-% kiválasztani. Így a továbbiakban a Google Play-re targetelt OpenFoodFacts alkalmazással
-% folytattam a fejlesztést.
-
-% TODO: ez még szerkesztésre szorul, csak át lett emelve a második hét alfejezetből,
-%       de ide való
 \section{Implementáció továbbfejlesztése: éjszakai mód támogatása}
-Ezen a héten a munkám az éjszakai módban látható töltőképernyő helyes megjelenítésére irányult.
+Az alapműködés implementációját követően a munkám az éjszakai módban látható töltőképernyő helyes megjelenítésére irányult.
 Sikerült kölcsönkérnem egy Android 12-es verziót futtató eszközt, azonban ezen sem sikerült
-előállítanom a \gls{github} issue-ban szereplő módon a hibát, így folytattam a hiba okának felkutatását
+előállítanom a \gls{github} issue-ban \cite{issue} szereplő módon a hibát, így folytattam a hiba okának felkutatását
 a kódban és az interneten egyaránt. Rövid utánajárást követően kiderült, hogy a
 \textit{styles.xml} fájlból nem volt megadva \textit{night} erőforrás-módosítóval
 (resource modifier) ellátott verzió. Ezt a hiányosságot pótoltam, létrehoztam egy éjszakai
@@ -84,12 +77,13 @@ az ikon helyes megjelenítéséhez szükséges propertykkel. Az így született 
 
 Ez azonban nem jelentett megoldást, mert a \gls{tema}, amiből az \acrshort{api} 30 feletti helyes működésért
 le kell származtatnunk a saját \glslink{tema}{témánkat}, nem támogatja az \gls{appcompat}\gls{activity} használatát, ami
-az \acrlong{off} activity\-/implementációjának ősosztálya. Így a SplashScreen \acrshort{api} által biztosított
-téma kizárólagos használatával az alkalmazás a töltőképernyő megjelenítését követően crashelt,
+az \acrlong{off} \gls{activity}{activity}\-/implementációjának ősosztálya. Így a \gls{splashscreen} \acrshort{api} által biztosított
+\gls{tema} kizárólagos használatával az alkalmazás a töltőképernyő megjelenítését követően hibára futott,
 ez \az{\ref{fig:appcompatcrash}} ábrán látható.
 \kep[0.5]{include/theme-appcompat-crash.png}{\textit{AppCompat} téma használata nélkül
 az alkalmazás összeomlik}{appcompatcrash}
 
+% TODO: StackOverflow és Android Developer hivatkozása?
 A probléma megoldására a StackOverflow-n és az Android fejlesztői oldalán elérhető leírás
 nyújtott iránymutatást. A \textit{postSplashScreenTheme} property megfelelő beállítását követően
 az alkalmazás már megfelelően működött, a töltőképernyő után a főképernyő helyesen jelent meg.
@@ -116,14 +110,14 @@ A fent definiált téma az alábbi módon jelenik meg a gyakorlatban (\ref{fig:d
 
 
 \section{Egyezetés a projekt fejlesztőivel}
-A negyedik héten kommunikációt folytattam az alkalmazás fejlesztőivel a pull request lehetséges
+A funkciók tesztelését követően kommunikációt folytattam az alkalmazás fejlesztőivel a pull request \cite{pullrequest} lehetséges
 javításairól, illetve ennek merge-öléséről. Az alkalmazás egyik fejlesztője egy import
 eltávolítását javasolta, rövid utánajárást követően \cite{extensionfunction} én viszont arra jutottam, hogy ez nem
 hagyható el, ugyanis egy ún. Kotlin \textit{extension function}-ről van szó, amire az import
 nélkül nem tudunk hivatkozni. A Kotlinban támogatott extension function-ök olyankor lehetnek
 hasznosak, amikor egy már -- nem általunk -- megírt osztály lehetőségeit szeretnénk bővíteni.
-Ilyen megoldást alkalmaztak a SplashScreen könyvtár fejlesztői is, az Android által biztosított
-Activity osztályt bővítették ki egy \textit{installSplashScreen} metódussal:
+Ilyen megoldást alkalmaztak a \gls{splashscreen} könyvtár \cite{splashscreenreference} fejlesztői is, az Android által biztosított
+\gls{activity} osztályt bővítették ki egy \textit{installSplashScreen} metódussal:
 
 \begin{lstlisting}[frame=single,language=Kotlin,emph={style,item}
     ,caption=Részlet a SplashScreen könyvtár kódjából az extension function-nel]
