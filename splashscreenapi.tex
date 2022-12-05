@@ -9,8 +9,8 @@ Az Android 12-ben bevezetett új \acrshort{api} előtt nem volt rendszerszintű 
 fejlesztésére, így a fejlesztők két lehetőség közül választhattak~\cite{splashscreenmigration}:
 \begin{itemize}
  \item Egyedi \gls{tema} bevezetése, amivel a nézet \textit{windowBackground} propertyjét változtatták meg,
- majd állították vissza az alkalmazás betöltését követően az alapértelmezett értékre
- \item Egyedi \textit{\Gls{activity}} létrehozásával: ezzel egy dedikált osztályt és nézetet hozunk létre
+ majd állították vissza az alkalmazás betöltését követően a kívánt értékre
+ \item Egyedi \Gls{activity} létrehozásával: ezzel egy dedikált osztályt és nézetet hozunk létre
  a töltőképernyő funkció megvalósítására, amely a betöltést vagy timeoutot követően elindítja
  az alkalmazás főképernyőjét % TODO: explicit intenttel, de erre nem biztos, hogy ebben a fejezetben ki kell térni
  % TODO: timeout a szójegyzékbe
@@ -24,8 +24,8 @@ emiatt vált szükségessé az alkalmazás felkészítése az újabb verzióval 
 \section{API level 31 (Android 12) és újabb}
 A \glslink{splashscreen}{SplashScreen} \acrshort{api} bevezetésével maga az operációs rendszer biztosít egységes megoldást
 töltőképernyő készítésére. Ez olyan lehetőségekkel bővítette a programozók eszköztárát, ami korábban
-nem, vagy csak körülményesen volt megvalósítható (pl. animált ikonok beállítása
-a töltőképernyőre).
+nem, vagy csak körülményesen volt megvalósítható (pl. animált ikonok megjelenítése
+a töltőképernyőn).
 Az új \acrshort{api} arra is lehetőséget ad, hogy a régebbi szoftververziót futtató eszközökön a \gls{splashscreen}
 compat könyvtár (mely az \gls{appcompat} könyvtár\footnote{\url{https://developer.android.com/jetpack/androidx/releases/appcompat}} részeként érhető el)
 segítségével biztosítsuk a visszafele kompatibilitást.

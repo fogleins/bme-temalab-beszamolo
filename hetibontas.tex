@@ -1,7 +1,7 @@
 \chapter{Jelentősebb állomások a~fejlesztés során}
 Munkám jelentős részét az Android dokumentációjának tanulmányozása, illetve a különböző lehetőségek
 tesztelése tette ki. Fontos volt még megismerni a projekt fejlesztésére vonatkozó irányelveket
-(pl. kódformázási konvenciók, pull requestek pontos leírása).
+(pl. kódformázási konvenciók, pull requestek pontos leírása) \cite{guidelines}.
 
 \section{Ismerkedés a projekttel}
 A projekt meghatározását követően igyekeztem megismerni annak felépítését, kideríteni, hogy
@@ -11,25 +11,25 @@ segítségével részletesen tanulmányoztam a projekt struktúráját, a relev�
 beszereztem a függőségeket, és lefordítottam a programot.
 
 \section{Migrálás az új API-ra, visszafelé kompatibilitás biztosítása}
-Android 12-es verziót futtató emulátor telepítését követően az Android fejlesztői
-dokumentációjában fellelhető migrációs útmutatóból tájékozódtam a további feladataimról.
-Az itt leírtakat követve a töltőképernyő helyesen jelent meg az \acrshort{api} 31-et futtató emulátoron.
+Android 12-es verziót futtató \gls{emulator} telepítését követően az Android fejlesztői
+dokumentációjában fellelhető migrációs útmutatóból tájékozódtam a további feladataimról \cite{splashscreenmigration}.
+Az itt leírtakat követve a töltőképernyő helyesen jelent meg az \acrshort{api} 31-et futtató \gls{emulator}on.
 Ilyen funkció esetében azonban nem feledkezhetünk meg a visszafelé kompatibilitás támogatásáról
-sem, ezért szükséges volt az új \acrshort{api}-t nem ismerő eszközökön is tesztelni a programot.
+sem, ezért szükséges volt az új könyvtárat nem ismerő eszközökön is tesztelni a programot.
 A régebbi \acrshort{api} verziót futtató eszközök esetében azt a megoldást választottam, hogy a már meglévő
 töltőképernyő jelenjen meg (azaz egy külön \glslink{splashscreen}{splash screen} \gls{activity} induljon el az alkalmazás
 indulásakor), míg az újakon a frissen implementált verzió. A~funkció tesztelése során
-megállapítottam, hogy a megoldás alapvetően az megfelelő eredményt adja, azonban -- ahogy az a
-\gls{github} issue-ban \cite{issue} is szerepelt -- az éjszakai módban nem az elvárt módon működik: sötét helyett
+megállapítottam, hogy a megoldás alapvetően a megfelelő eredményt adja, azonban -- ahogy az a
+\gls{github} issue-ban is szerepelt \cite{issue} -- az éjszakai módban nem az elvárt módon működik: sötét helyett
 fehér háttérszínnel jelenik meg a képernyő. A hibajegyhez mellékelt képernyőképen szereplőhöz
-hasonló kinézetű töltőképernyőt az emulátoron nem sikerült reprodukálni, ott az éjszakai mód
+hasonló kinézetű töltőképernyőt az \gls{emulator}on nem sikerült reprodukálni, ott az éjszakai mód
 bekapcsolását követően is fehér háttérszínnel indult el a töltőképernyő, csak az alkalmazás
 további részei használták az éjszakai témát. Mivel Android 12-t futtató eszköz nem állt
 rendelkezésemre, ezért valódi hardveren nem tudtam tesztelni az programot.
 
-A munkám során alkalmam nyílt megismerni egy, az Androidos szoftverfejlesztésben elterjedt
+A munkám során alkalmam nyílt megismerni egy, az Androidos szoftverfejlesztésben használt
 megoldást az alkalmazás különböző verzióinak egyszerű kezelésére és előállítására. Ebben a projektben ez
-különösképpen nagy jelentőséggel bír, mert nem csak arról van szó, hogy az alkalmast több
+különösképpen nagy jelentőséggel bír, hiszen nem csak arról van szó, hogy az alkalmazást több
 alkalmazásboltban is terjesztik (pl. Google Play, F-Droid), hanem ugyanarra a kódbázisra
 három különböző alkalmazást (\acrfull{off}, \acrfull{obf}, \acrfull{opff})
 is építenek. Ez azért is lehetséges, mert az alkalmazás lényegében csak egy felhasználói felület
@@ -39,7 +39,7 @@ A build variants használata lehetővé teszi, hogy mindössze egyetlen Android 
 készítsenek, amit különféle verziókra (flavor) lehet lefordítani. Eleinte nehézséget okozott,
 hogy alapértelmezetten a git repository klónozását követően az \acrlong{obf} alkalmazás
 települt. Mivel az alkalmazás szinte teljesen megegyezik az \acrlong{off} alkalmazással, a
-tesztelés során ez nem jelentett gondot, de a \glslink{splashscreen}{splash screen} megjelenő ikon más, ezért az éjszakai
+tesztelés során ez nem jelentett gondot, de a \glslink{splashscreen}{splash screenen} megjelenő ikon más, ezért az éjszakai
 mód teszteléséhez már az \acrlong{off}-et volt szükséges telepíteni. Némi kutatómunka után
 találtam rá arra a lehetőségre \gls{androidstudio}ban, amivel a fordítandó build variant-ot lehet
 kiválasztani. Így a továbbiakban a Google Play-re targetelt \acrlong{off} alkalmazással
@@ -48,11 +48,11 @@ folytattam a fejlesztést.
 \section{Implementáció továbbfejlesztése: éjszakai mód támogatása}
 Az alapműködés implementációját követően a munkám az éjszakai módban látható töltőképernyő helyes megjelenítésére irányult.
 Sikerült kölcsönkérnem egy Android 12-es verziót futtató eszközt, azonban ezen sem sikerült
-előállítanom a \gls{github} issue-ban \cite{issue} szereplő módon a hibát, így folytattam a hiba okának felkutatását
+előállítanom a \gls{github} issue-ban \cite{issue} szereplő módon a hibát, így folytattam az okának felkutatását
 a kódban és az interneten egyaránt. Rövid utánajárást követően kiderült, hogy a
 \textit{styles.xml} fájlból nem volt megadva \textit{night} erőforrás-módosítóval
 (resource modifier) ellátott verzió. Ezt a hiányosságot pótoltam, létrehoztam egy éjszakai
-módban helyesen megjelenő stílus erőforrást. Ebben a háttérszín megváltoztatásán túl szükséges
+módban helyesen megjelenő stílus erőforrásfájlt. Ebben a háttérszín megváltoztatásán túl szükséges
 volt a SplashScreen \acrshort{api}-által biztosított témából egy sajátot leszármaztatni, mely rendelkezik
 az ikon helyes megjelenítéséhez szükséges propertykkel. Az így született \gls{tema} az alábbi:
 
@@ -75,19 +75,19 @@ az ikon helyes megjelenítéséhez szükséges propertykkel. Az így született 
 </style>
 \end{lstlisting}
 
-Ez azonban nem jelentett megoldást, mert a \gls{tema}, amiből az \acrshort{api} 30 feletti helyes működésért
+Ez azonban nem jelentett megoldást, mert a \gls{tema}, amiből az \acrshort{api} 31 feletti helyes működésért
 le kell származtatnunk a saját \glslink{tema}{témánkat}, nem támogatja az \gls{appcompat}\gls{activity} használatát, ami
-az \acrlong{off} \gls{activity}{activity}\-/implementációjának ősosztálya. Így a \gls{splashscreen} \acrshort{api} által biztosított
+az \acrlong{off} \glslink{activity}{activity}\-/implementációjának ősosztálya. Így a \gls{splashscreen} \acrshort{api} által biztosított
 \gls{tema} kizárólagos használatával az alkalmazás a töltőképernyő megjelenítését követően hibára futott,
 ez \az{\ref{fig:appcompatcrash}} ábrán látható.
-\kep[0.5]{include/theme-appcompat-crash.png}{\textit{AppCompat} téma használata nélkül
+\kep[0.5]{include/theme-appcompat-crash.png}{\textit{AppCompat} \gls{tema} használata nélkül
 az alkalmazás összeomlik}{appcompatcrash}
 
 % TODO: StackOverflow és Android Developer hivatkozása?
-A probléma megoldására a StackOverflow-n és az Android fejlesztői oldalán elérhető leírás
-nyújtott iránymutatást. A \textit{postSplashScreenTheme} property megfelelő beállítását követően
+A probléma megoldására az Android fejlesztői oldalán elérhető leírás
+nyújtott iránymutatást \cite{splashscreenmigration}. A \textit{postSplashScreenTheme} property megfelelő beállítását követően
 az alkalmazás már megfelelően működött, a töltőképernyő után a főképernyő helyesen jelent meg.
-Így az éjszakai módban használt téma kódja az alábbi:
+Így az éjszakai módban használt \gls{tema} kódja az alábbi:
 
 \begin{lstlisting}[frame=single,language=xml,emph={style,item},
     emphstyle=\color{BurntOrange}\textbf,stringstyle=\color{OliveGreen}\textbf]
@@ -105,13 +105,13 @@ az alkalmazás már megfelelően működött, a töltőképernyő után a főké
 </style>
 \end{lstlisting}
 
-A fent definiált téma az alábbi módon jelenik meg a gyakorlatban (\ref{fig:darktheme} ábra):
+A fent definiált \gls{tema} az alábbi módon jelenik meg a gyakorlatban (\ref{fig:darktheme} ábra):
 \kep[0.11]{include/darktheme.png}{A töltőképernyő éjszakai módban, Android 12-n}{darktheme}
 
 
 \section{Egyezetés a projekt fejlesztőivel}
-A funkciók tesztelését követően kommunikációt folytattam az alkalmazás fejlesztőivel a pull request \cite{pullrequest} lehetséges
-javításairól, illetve ennek merge-öléséről. Az alkalmazás egyik fejlesztője egy import
+A funkciók tesztelését követően kommunikációt folytattam az alkalmazás fejlesztőivel a pull request lehetséges
+javításairól, illetve a módosításaim kódbázisba kerüléséről \cite{pullrequest}. Az alkalmazás egyik fejlesztője egy import
 eltávolítását javasolta, rövid utánajárást követően \cite{extensionfunction} én viszont arra jutottam, hogy ez nem
 hagyható el, ugyanis egy ún. Kotlin \textit{extension function}-ről van szó, amire az import
 nélkül nem tudunk hivatkozni. A Kotlinban támogatott extension function-ök olyankor lehetnek
@@ -129,7 +129,7 @@ Ilyen megoldást alkalmaztak a \gls{splashscreen} könyvtár \cite{splashscreenr
 \kep[0.59]{include/gh-discussion.png}{Egyeztetés a projekt egyik fejlesztőjével az extension function importjáról}{ghdiscussion}
 
 Végül a projekt másik fejlesztője is az enyémmel azonos következtetésre jutott, az import
-nem hagyható el, így a módosításaim elfogadásra jutottak, és bekerültek az alkalmazás kódbázisába.
+nem hagyható el, így a módosításaimat elfogadták, és bekerültek az alkalmazás kódbázisába.
 
 % TODO: backwards compatibility támogatása
 %       sötét téma
@@ -139,9 +139,4 @@ nem hagyható el, így a módosításaim elfogadásra jutottak, és bekerültek 
 %       https://github.com/openfoodfacts/openfoodfacts-androidapp/pull/4871
 %       https://github.com/openfoodfacts/openfoodfacts-androidapp/issues/4548
 %       https://kotlinlang.org/docs/extensions.html#scope-of-extensions
-% GitHub fogalomjegyzékbe
 % repository fogalomjegyzékbe
-% Android Studio fogalomjegyzékbe
-% emulátor fogalomjegyzékbe
-% TODO: \begin{verbatim} helyett \begin{xmlcode}
-% TODO: AppCompatActivity hivatkozása
