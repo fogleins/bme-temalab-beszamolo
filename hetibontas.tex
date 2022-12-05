@@ -6,7 +6,7 @@ tesztelése tette ki. Fontos volt még megismerni a projekt fejlesztésére vona
 \section{Ismerkedés a projekttel}
 A projekt meghatározását követően igyekeztem megismerni annak felépítését, kideríteni, hogy
 pontosan melyik modulokkal kell majd dolgoznom a töltőképernyő frissebb verziójának elkészítéséhez.
-Ehhez klónoztam a projekt \gls{github} repositoryját, és az \gls{androidstudio} fejlesztőkörnyezet
+Ehhez klónoztam a projekt \gls{github} \glslink{repo}{repositoryját}, és az \gls{androidstudio} fejlesztőkörnyezet
 segítségével részletesen tanulmányoztam a projekt struktúráját, a releváns kódrészleteket,
 beszereztem a függőségeket, és lefordítottam a programot.
 
@@ -27,6 +27,18 @@ bekapcsolását követően is fehér háttérszínnel indult el a töltőképern
 további részei használták az éjszakai témát. Mivel Android 12-t futtató eszköz nem állt
 rendelkezésemre, ezért valódi hardveren nem tudtam tesztelni az programot.
 
+\begin{lstlisting}[frame=single, language=Kotlin, caption=A \gls{splashscreen} compat könyvtár
+    segítségével visszafele kompatibilitást támogató kódrészlet]
+val splashScreen: SplashScreen? =
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        installSplashScreen()
+    } else {
+        null
+    }
+splashScreen?.setKeepOnScreenCondition { true }
+\end{lstlisting}
+
+
 A munkám során alkalmam nyílt megismerni egy, az Androidos szoftverfejlesztésben használt
 megoldást az alkalmazás különböző verzióinak egyszerű kezelésére és előállítására. Ebben a projektben ez
 különösképpen nagy jelentőséggel bír, hiszen nem csak arról van szó, hogy az alkalmazást több
@@ -37,7 +49,7 @@ az \acrlong{off} (és a többi verzió) adatbázisának elérésére. Így maga 
 az ikonok és egyéb felhasználói elemek kivételével megegyezik a három verzió között.
 A build variants használata lehetővé teszi, hogy mindössze egyetlen Android appot
 készítsenek, amit különféle verziókra (flavor) lehet lefordítani. Eleinte nehézséget okozott,
-hogy alapértelmezetten a git repository klónozását követően az \acrlong{obf} alkalmazás
+hogy alapértelmezetten a \Gls{git} \gls{repo} klónozását követően az \acrlong{obf} alkalmazás
 települt. Mivel az alkalmazás szinte teljesen megegyezik az \acrlong{off} alkalmazással, a
 tesztelés során ez nem jelentett gondot, de a \glslink{splashscreen}{splash screenen} megjelenő ikon más, ezért az éjszakai
 mód teszteléséhez már az \acrlong{off}-et volt szükséges telepíteni. Némi kutatómunka után
@@ -45,13 +57,13 @@ találtam rá arra a lehetőségre \gls{androidstudio}ban, amivel a fordítandó
 kiválasztani. Így a továbbiakban a Google Play-re targetelt \acrlong{off} alkalmazással
 folytattam a fejlesztést.
 
-\section{Implementáció továbbfejlesztése: éjszakai mód támogatása}
+\section{Implementáció továbbfejlesztése: sötét mód támogatása}
 Az alapműködés implementációját követően a munkám az éjszakai módban látható töltőképernyő helyes megjelenítésére irányult.
 Sikerült kölcsönkérnem egy Android 12-es verziót futtató eszközt, azonban ezen sem sikerült
 előállítanom a \gls{github} issue-ban \cite{issue} szereplő módon a hibát, így folytattam az okának felkutatását
 a kódban és az interneten egyaránt. Rövid utánajárást követően kiderült, hogy a
-\textit{styles.xml} fájlból nem volt megadva \textit{night} erőforrás-módosítóval
-(resource modifier) ellátott verzió. Ezt a hiányosságot pótoltam, létrehoztam egy éjszakai
+\textit{styles.xml} fájlból nem volt megadva \textit{night} \gls{resmod}vel
+(resource qualifier) ellátott verzió. Ezt a hiányosságot pótoltam, létrehoztam egy éjszakai
 módban helyesen megjelenő stílus erőforrásfájlt. Ebben a háttérszín megváltoztatásán túl szükséges
 volt a SplashScreen \acrshort{api}-által biztosított témából egy sajátot leszármaztatni, mely rendelkezik
 az ikon helyes megjelenítéséhez szükséges propertykkel. Az így született \gls{tema} az alábbi:
@@ -126,7 +138,7 @@ Ilyen megoldást alkalmaztak a \gls{splashscreen} könyvtár \cite{splashscreenr
     // ...
  }
 \end{lstlisting}
-\kep[0.59]{include/gh-discussion.png}{Egyeztetés a projekt egyik fejlesztőjével az extension function importjáról}{ghdiscussion}
+\kep[0.56]{include/gh-discussion-light.png}{Egyeztetés a projekt egyik fejlesztőjével az extension function importjáról}{ghdiscussion}
 
 Végül a projekt másik fejlesztője is az enyémmel azonos következtetésre jutott, az import
 nem hagyható el, így a módosításaimat elfogadták, és bekerültek az alkalmazás kódbázisába.

@@ -6,15 +6,15 @@
 
 \usepackage{graphicx}
 \usepackage{datetime}
-\usepackage{hyperref}
 \usepackage{url}
 \usepackage{listings}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{float} % kep környezetben H használatához (erősebb a h!-nél)
+\usepackage{hyperref}
 % https://stackoverflow.com/questions/2193307/how-do-i-get-latex-to-hyphenate-a-word-that-contains-a-dash
 \usepackage[shortcuts]{extdash} % ``activity-implementációjának`` helyes elválasztásához
 \usepackage{tocbibind} % irodalomjegyzék, tárgymutató a tartalomjegyzékbe
-\usepackage[toc]{glossaries}
+\usepackage[toc, acronyms]{glossaries}
 \usepackage{makeidx}
 \usepackage{tikz}
 
@@ -68,6 +68,8 @@
 \newacronym{api}{API}{Application Programming Interface}
 \newacronym{ocr}{OCR}{Optical Character Recognition}
 
+\hyphenation{SplashScreen}
+
 \newglossaryentry{splashscreen}
 {
 	name=SplashScreen,
@@ -117,11 +119,36 @@
 	Android fejlesztésben szinte mindig egy virtuális telefont jelent \cite{emulator}}
 }
 
+\newglossaryentry{repo}
+{
+	name=repository,
+	description={Itt: Git repository, azaz verziókövetéssel ellátott forráskódtároló.
+	Általában egy projekt teljes forrásállománya található benne, így a letöltését és a
+	függőségek beszerzését követően	lefordíthatjuk a szoftvert}
+}
+
+\newglossaryentry{git}
+{
+	name=Git,
+	description={Széleskörben elterjedt verziókezelő rendszer elsősorban szoftverfejlesztéshez,
+	forráskódfájlok verzióinak kezelésére}
+}
+
+\newglossaryentry{resmod}
+{
+	name={erőforrásminősítő},
+	description={Az Android platform által támogatott megoldás az eszközkonfigurációnak
+	legmegfelelőbb erőforrások (pl. képek, képernyőelrendezések) betöltésére}
+}
+
 \begin{document}
 
-	\pagenumbering{roman}
+	% hypperref warning elkerüléséhez
+	% lásd: https://tex.stackexchange.com/questions/18924/pdftex-warning-ext4-destination-with-the-same-identifier-nam-epage-1-has
+	\pagenumbering{Alph}
 	\include{cimoldal}
 
+	\pagenumbering{roman}
 	\tableofcontents
 
 	\newpage

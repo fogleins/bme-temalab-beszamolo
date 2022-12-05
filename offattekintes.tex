@@ -21,17 +21,17 @@ részletet. A program támogatja az optikai szövegfelismerést (\acrfull{ocr}),
 így akár a felhasználó időigényes közreműködése nélkül is ki tud nyerni lényeges információkat a
 feltöltött képekből (\ref{fig:nutriextractionflow} ábra). Az így felvett információk bekerülnek egy adatbázisba, és így a program többi
 felhasználója is szabadon hozzáférhet az adatokhoz.
-\kep[0.045]{include/nutrifacts-extraction.png}{Az \acrlong{off} képes automatikusan is információkinyerésre a feltöltött képek alapján. Forrás: \cite{autodataextraction}}{nutriextractionflow}
+\kep[0.044]{include/nutrifacts-extraction.png}{Az \acrlong{off} képes automatikusan is információkinyerésre a feltöltött képek alapján. Forrás: \cite{autodataextraction}}{nutriextractionflow}
 
 Az \acrlong{off} natív Android és iOS applikáció mellett rendelkezik egy keresztplatformos,
 Flutter-alapú alkalmazással\footnote{\url{https://github.com/openfoodfacts/smooth-app}} is, továbbá egy webes alkalmazáson keresztül is hozzáférhetünk az
-élelmiszerek adataihoz. A kliensek REST API segítségével kommunikálhatnak a % TODO: rest api szójegyzékbe
+élelmiszerek adataihoz. A kliensek REST~API segítségével kommunikálhatnak a % TODO: rest api szójegyzékbe
 szerverrel. Az \acrlong{off} architektúrájának sematikus rajza \az{\ref{fig:offarchitektura}}
 ábrán látható. A továbbiakban az architektúra szerver oldali részével nem foglalkozunk, az
 ábrán kékkel jelölt mobilos kliensek közül is csak a natív Androidos alkalmazást nézzük meg részletesebben.
 
 % tikz ábra beszúrása
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 \input{offarchitektura.tex}
 \caption{\centering Az \acrlong{off} rendszer architektúrája, a mobilos kliensek elhelyezkedése az architektúrában}
