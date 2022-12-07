@@ -19,8 +19,8 @@ sem, ezért szükséges volt az új könyvtárat nem ismerő eszközökön is te
 A régebbi \acrshort{api} verziót futtató eszközök esetében azt a megoldást választottam, hogy a már meglévő
 töltőképernyő jelenjen meg (azaz egy külön \glslink{splashscreen}{splash screen} \gls{activity} induljon el az alkalmazás
 indulásakor), míg az újakon a frissen implementált verzió. A~funkció tesztelése során
-megállapítottam, hogy a megoldás alapvetően a megfelelő eredményt adja, azonban -- ahogy az a
-\gls{github} issue-ban is szerepelt \cite{issue} -- az éjszakai módban nem az elvárt módon működik: sötét helyett
+megállapítottam, hogy a megoldás alapvetően a megfelelő eredményt adja, azonban~--~ahogy~az~a~
+\gls{github} issue-ban~is~\mbox{szerepelt}~\cite{issue}~--~az éjszakai módban nem az elvárt módon működik: sötét helyett
 fehér háttérszínnel jelenik meg a képernyő. A hibajegyhez mellékelt képernyőképen szereplőhöz
 hasonló kinézetű töltőképernyőt az \gls{emulator}on nem sikerült reprodukálni, ott az éjszakai mód
 bekapcsolását követően is fehér háttérszínnel indult el a töltőképernyő, csak az alkalmazás
@@ -65,8 +65,8 @@ a kódban és az interneten egyaránt. Rövid utánajárást követően kiderül
 \textit{styles.xml} fájlból nem volt megadva \textit{night} \gls{resmod}vel
 (resource qualifier) ellátott verzió. Ezt a hiányosságot pótoltam, létrehoztam egy éjszakai
 módban helyesen megjelenő stílus erőforrásfájlt. Ebben a háttérszín megváltoztatásán túl szükséges
-volt a SplashScreen \acrshort{api}-által biztosított témából egy sajátot leszármaztatni, mely rendelkezik
-az ikon helyes megjelenítéséhez szükséges propertykkel. Az így született \gls{tema} az alábbi:
+volt a \gls{splashscreen} \acrshort{api}-által biztosított témából egy sajátot leszármaztatni, mely rendelkezik
+az ikon helyes megjelenítéséhez szükséges tulajdonságokkal. Az így született \gls{tema} az alábbi:
 
 \begin{lstlisting}[frame=single,language=xml,emph={style,item},
     emphstyle=\color{BurntOrange}\textbf,stringstyle=\color{OliveGreen}\textbf]
@@ -97,7 +97,7 @@ az alkalmazás összeomlik}{appcompatcrash}
 
 % TODO: StackOverflow és Android Developer hivatkozása?
 A probléma megoldására az Android fejlesztői oldalán elérhető leírás
-nyújtott iránymutatást \cite{splashscreenmigration}. A \textit{postSplashScreenTheme} property megfelelő beállítását követően
+nyújtott iránymutatást \cite{splashscreenmigration}. A \textit{postSplashScreenTheme} tagváltozó megfelelő beállítását követően
 az alkalmazás már megfelelően működött, a töltőképernyő után a főképernyő helyesen jelent meg.
 Így az éjszakai módban használt \gls{tema} kódja az alábbi:
 
