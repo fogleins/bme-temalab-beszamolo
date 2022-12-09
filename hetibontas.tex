@@ -1,6 +1,6 @@
 \chapter{Jelentősebb állomások a~fejlesztés során}
 Munkám jelentős részét az Android dokumentációjának tanulmányozása, illetve a különböző lehetőségek
-tesztelése tette ki. Fontos volt még megismerni a projekt fejlesztésére vonatkozó irányelveket
+tesztelése tette ki. Fontos volt még megismernem a projekt fejlesztésére vonatkozó irányelveket
 (pl. kódformázási konvenciók, pull requestek pontos leírása) \cite{guidelines}.
 
 \section{Ismerkedés a projekttel}
@@ -18,7 +18,7 @@ Ilyen funkció esetében azonban nem feledkezhetünk meg a visszafelé kompatibi
 sem, ezért szükséges volt az új könyvtárat nem ismerő eszközökön is tesztelni a programot.
 A régebbi \acrshort{api} verziót futtató eszközök esetében azt a megoldást választottam, hogy a már meglévő
 töltőképernyő jelenjen meg (azaz egy külön \glslink{splashscreen}{splash screen} \gls{activity} induljon el az alkalmazás
-indulásakor), míg az újakon a frissen implementált verzió. A~funkció tesztelése során
+inicializálásakor), míg az újakon a frissen implementált verzió. A~funkció tesztelése során
 megállapítottam, hogy a megoldás alapvetően a megfelelő eredményt adja, azonban~--~ahogy~az~a~
 \gls{github} issue-ban~is~\mbox{szerepelt}~\cite{issue}~--~az éjszakai módban nem az elvárt módon működik: sötét helyett
 fehér háttérszínnel jelenik meg a képernyő. A hibajegyhez mellékelt képernyőképen szereplőhöz
@@ -41,12 +41,12 @@ splashScreen?.setKeepOnScreenCondition { true }
 
 A munkám során alkalmam nyílt megismerni egy, az Androidos szoftverfejlesztésben használt
 megoldást az alkalmazás különböző verzióinak egyszerű kezelésére és előállítására. Ebben a projektben ez
-különösképpen nagy jelentőséggel bír, hiszen nem csak arról van szó, hogy az alkalmazást több
+különösképpen nagy jelentőséggel bír, hiszen nemcsak arról van szó, hogy az alkalmazást több
 alkalmazásboltban is terjesztik (pl. Google Play, F-Droid), hanem ugyanarra a kódbázisra
 három különböző alkalmazást (\acrfull{off}, \acrfull{obf}, \acrfull{opff})
 is építenek. Ez azért is lehetséges, mert az alkalmazás lényegében csak egy felhasználói felület
 az \acrlong{off} (és a többi verzió) adatbázisának elérésére. Így maga a kliens oldali alkalmazás
-az ikonok és egyéb felhasználói elemek kivételével megegyezik a három verzió között.
+az ikonok és egyéb felhasználói felületi elemek kivételével megegyezik a három verzió között.
 A build variants használata lehetővé teszi, hogy mindössze egyetlen Android appot
 készítsenek, amit különféle verziókra (flavor) lehet lefordítani. Eleinte nehézséget okozott,
 hogy alapértelmezetten a \Gls{git} \gls{repo} klónozását követően az \acrlong{obf} alkalmazás
@@ -78,9 +78,6 @@ az ikon helyes megjelenítéséhez szükséges tulajdonságokkal. Az így szüle
     <item name="windowSplashScreenIconBackgroundColor">
         @color/grey_400
     </item>
-    <item name="postSplashScreenTheme">
-        @style/Theme.AppCompat.DayNight
-    </item>
     <item name="windowSplashScreenAnimatedIcon">
         @mipmap/ic_launcher_round
     </item>
@@ -92,10 +89,9 @@ le kell származtatnunk a saját \glslink{tema}{témánkat}, nem támogatja az \
 az \acrlong{off} \glslink{activity}{activity}\-/implementációjának ősosztálya. Így a \gls{splashscreen} \acrshort{api} által biztosított
 \gls{tema} kizárólagos használatával az alkalmazás a töltőképernyő megjelenítését követően hibára futott,
 ez \az{\ref{fig:appcompatcrash}} ábrán látható.
-\kep[0.5]{include/theme-appcompat-crash.png}{\textit{AppCompat} \gls{tema} használata nélkül
+\kep[0.5]{include/theme-appcompat-crash.png}{\gls{appcompat} \gls{tema} használata nélkül
 az alkalmazás összeomlik}{appcompatcrash}
 
-% TODO: StackOverflow és Android Developer hivatkozása?
 A probléma megoldására az Android fejlesztői oldalán elérhető leírás
 nyújtott iránymutatást \cite{splashscreenmigration}. A \textit{postSplashScreenTheme} tagváltozó megfelelő beállítását követően
 az alkalmazás már megfelelően működött, a töltőképernyő után a főképernyő helyesen jelent meg.
@@ -113,6 +109,9 @@ az alkalmazás már megfelelően működött, a töltőképernyő után a főké
     </item>
     <item name="postSplashScreenTheme">
         @style/Theme.AppCompat.DayNight
+    </item>
+    <item name="windowSplashScreenAnimatedIcon">
+        @mipmap/ic_launcher_round
     </item>
 </style>
 \end{lstlisting}
