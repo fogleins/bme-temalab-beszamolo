@@ -134,19 +134,19 @@ TextFolding={"checksum":"81d2f0329585fd21b7180f636cc6a4d2aff2b2e2","ranges":[]}
 ViMarks=
 
 [view-settings,view=0,item:beszamolo-za0d8t.tex]
-CursorColumn=41
-CursorLine=63
+CursorColumn=0
+CursorLine=27
 Dynamic Word Wrap=false
 JumpList=
-TextFolding={"checksum":"408d1edcacd6dcc60cc3857d0ad8b5114ace784e","ranges":[]}
+TextFolding={"checksum":"03ec6d63f53b9a1fa30f48cc55023c54c3cd2732","ranges":[]}
 ViMarks=
 
 [view-settings,view=0,item:bevezetes.tex]
-CursorColumn=65
-CursorLine=14
+CursorColumn=0
+CursorLine=0
 Dynamic Word Wrap=false
 JumpList=
-TextFolding={"checksum":"324922afc73e26b81017c70c1fa9abdcafbd9134","ranges":[]}
+TextFolding={"checksum":"42a0960bdc606cf2954bc096d66c044deb5a7e31","ranges":[]}
 ViMarks=
 
 [view-settings,view=0,item:cimoldal.tex]
@@ -158,11 +158,11 @@ TextFolding={"checksum":"c864ece173b3dfb7a1c593fdbd5a58c731ff6597","ranges":[]}
 ViMarks=
 
 [view-settings,view=0,item:hetibontas.tex]
-CursorColumn=96
-CursorLine=99
+CursorColumn=41
+CursorLine=92
 Dynamic Word Wrap=false
 JumpList=
-TextFolding={"checksum":"4deef78685014667e3acaddf9219fea9257416c3","ranges":[]}
+TextFolding={"checksum":"d1e71a01770525432242da31bb2e106b2ddf4dde","ranges":[]}
 ViMarks=
 
 [view-settings,view=0,item:offarchitektura.tex]
@@ -175,24 +175,24 @@ ViMarks=
 
 [view-settings,view=0,item:offattekintes.tex]
 CursorColumn=0
-CursorLine=15
+CursorLine=28
 Dynamic Word Wrap=false
 JumpList=
-TextFolding={"checksum":"be45a8779ffb45599728a953acdade458ec0aae3","ranges":[]}
+TextFolding={"checksum":"a9c477896477b45bd96926018af4f0f396872bf8","ranges":[]}
 ViMarks=
 
 [view-settings,view=0,item:osszegzes.tex]
-CursorColumn=0
-CursorLine=15
+CursorColumn=26
+CursorLine=7
 Dynamic Word Wrap=false
 JumpList=
 TextFolding={"checksum":"1b19b49363279b5ce9ba3a5b57a0041a8454f5f7","ranges":[]}
 ViMarks=
 
 [view-settings,view=0,item:splashscreenapi.tex]
-CursorColumn=0
-CursorLine=29
+CursorColumn=40
+CursorLine=27
 Dynamic Word Wrap=false
 JumpList=
-TextFolding={"checksum":"4fae6d77b4b9ac742e70f2efac09e313ea58ba38","ranges":[]}
+TextFolding={"checksum":"fec89baa08f7d1b630f17b6b365d68023ed5a6cc","ranges":[]}
 ViMarks=
